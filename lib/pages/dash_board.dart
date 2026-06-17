@@ -27,7 +27,7 @@ class DashboardPage extends StatelessWidget {
         ),
       ),
 
-      child: SingleChildScrollView(
+      child: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -267,33 +267,6 @@ class SpendingChart extends StatelessWidget {
           Expanded(
             child: LineChart(
               LineChartData(
-                minX: 0,
-                maxX: 11,
-                minY: 0,
-                maxY: 16000,
-
-                lineTouchData: LineTouchData(
-                  handleBuiltInTouches: true,
-
-                  touchTooltipData: LineTouchTooltipData(
-                    getTooltipItems: (spots){
-                      return spots.map((spot){
-                        return LineTooltipItem(
-                          spot.barIndex == 0
-                              ?"Income\n¥${spot.y.toInt()}"
-                              :"Expense\n¥${spot.y.toInt()}",
-                          TextStyle(
-                            color: spot.barIndex == 0
-                                ? Colors.cyanAccent
-                                : Colors.pinkAccent,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        );
-                      }).toList();
-                    },
-                  ),
-                ),
-
                 gridData: FlGridData(
                   show: true,
                   drawVerticalLine: false,
@@ -323,7 +296,6 @@ class SpendingChart extends StatelessWidget {
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      interval: 1,
 
                       getTitlesWidget: (value, meta) {
                         const months = [
@@ -367,7 +339,7 @@ class SpendingChart extends StatelessWidget {
                     isCurved: true,
                     color: Colors.cyanAccent,
                     barWidth: 4,
-                    dotData: const FlDotData(show: true),
+                    dotData: const FlDotData(show: false),
 
                     spots: const [
                       FlSpot(0, 1200),
@@ -377,11 +349,6 @@ class SpendingChart extends StatelessWidget {
                       FlSpot(4, 1800),
                       FlSpot(5, 2500),
                       FlSpot(6, 2300),
-                      FlSpot(7, 1700),
-                      FlSpot(8, 1800),
-                      FlSpot(9, 1750),
-                      FlSpot(10, 2000),
-                      FlSpot(11, 2450),
                     ],
 
                     belowBarData: BarAreaData(
@@ -395,9 +362,9 @@ class SpendingChart extends StatelessWidget {
                     isCurved: true,
                     color: Colors.pinkAccent,
                     barWidth: 4,
-                    dotData: const FlDotData(show: true),
+                    dotData: const FlDotData(show: false),
 
-                    spots: [
+                    spots: const [
                       FlSpot(0, 900),
                       FlSpot(1, 1100),
                       FlSpot(2, 1000),
@@ -405,11 +372,6 @@ class SpendingChart extends StatelessWidget {
                       FlSpot(4, 1300),
                       FlSpot(5, 1600),
                       FlSpot(6, 1500),
-                      FlSpot(7, 2000),
-                      FlSpot(8, 1500),
-                      FlSpot(9, 2500),
-                      FlSpot(10, 300),
-                      FlSpot(11, 2890),
                     ],
                   ),
                 ],

@@ -43,5 +43,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+<<<<<<< HEAD
 
 .fake
+=======
+>>>>>>> 4dd06d7730ac7ddfbb3fe7d9c70c5531541617cb
