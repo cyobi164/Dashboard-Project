@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:app/models/transaction.dart';
 import 'package:fl_chart/fl_chart.dart';
 
 class DashboardPage extends StatelessWidget {
@@ -16,6 +17,12 @@ class DashboardPage extends StatelessWidget {
       [const Color(0xFF4F46E5), const Color(0xFF3BB2F6)],
       [const Color(0xFF10B981), const Color(0xFF34D399)],
       [const Color(0xFFF59E0B), const Color(0xFFFBBF24)],
+    ];
+
+    final transactions = [
+      Transaction(title: "Food", amount: -3500, isIncome: false),
+      Transaction(title: "Netflix", amount: -1200, isIncome: false),
+      Transaction(title: "Salary", amount: 200000, isIncome: true),
     ];
 
     return Container(
@@ -136,11 +143,9 @@ class DashboardPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
 
-              child: const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-
+              child: Column(
                 children: [
-                  Text(
+                  const Text(
                     "Recent Transactions",
                     style: TextStyle(
                       color: Colors.white,
@@ -149,43 +154,25 @@ class DashboardPage extends StatelessWidget {
                     ),
                   ),
 
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
 
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    leading: Icon(Icons.fastfood, color: Colors.orange),
-                    title: Text("Food", style: TextStyle(color: Colors.white)),
-                    trailing: Text(
-                      "-¥3,500",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    leading: Icon(Icons.movie, color: Colors.red),
-                    title: Text(
-                      "Netflix",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    trailing: Text(
-                      "-¥1,200",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-
-                  ListTile(
-                    contentPadding: EdgeInsets.zero,
-                    leading: Icon(Icons.attach_money, color: Colors.green),
-                    title: Text(
-                      "Salary",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    trailing: Text(
-                      "+¥200,000",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
+                  ...transactions.map((t) {
+                    return ListTile(
+                      contentPadding: EdgeInsets.zero,
+                      leading: Icon(
+                        t.isIncome ? Icons.attach_money : Icons.money_off,
+                        color: t.isIncome ? Colors.green : Colors.red,
+                      ),
+                      title: Text(
+                        t.title,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      trailing: Text(
+                        "${t.isIncome ? "+" : "-"}¥${t.amount.abs().toInt()}",
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    );
+                  }),
                 ],
               ),
             ),
@@ -276,12 +263,12 @@ class SpendingChart extends StatelessWidget {
                   handleBuiltInTouches: true,
 
                   touchTooltipData: LineTouchTooltipData(
-                    getTooltipItems: (spots){
-                      return spots.map((spot){
+                    getTooltipItems: (spots) {
+                      return spots.map((spot) {
                         return LineTooltipItem(
                           spot.barIndex == 0
-                              ?"Income\n¥${spot.y.toInt()}"
-                              :"Expense\n¥${spot.y.toInt()}",
+                              ? "Income\n¥${spot.y.toInt()}"
+                              : "Expense\n¥${spot.y.toInt()}",
                           TextStyle(
                             color: spot.barIndex == 0
                                 ? Colors.cyanAccent
