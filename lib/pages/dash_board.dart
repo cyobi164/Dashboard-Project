@@ -36,7 +36,9 @@ class DashboardPage extends StatelessWidget {
       ),
 
       child: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
+        padding: EdgeInsets.all(
+          Responsive.isMobile(context) ? 12 : 24,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
 
@@ -122,9 +124,9 @@ class DashboardPage extends StatelessWidget {
 
                       Text(
                         amounts[index],
-                        style: const TextStyle(
+                        style: TextStyle(
                           color: Colors.white,
-                          fontSize: 30,
+                          fontSize: Responsive.isMobile(context) ? 22 : 30,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -194,7 +196,7 @@ class SpendingChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 450,
+      height:   Responsive.isMobile(context) ? 300 : 450,
       padding: const EdgeInsets.all(20),
 
       decoration: BoxDecoration(
@@ -262,7 +264,7 @@ class SpendingChart extends StatelessWidget {
                 minX: 0,
                 maxX: 11,
                 minY: 0,
-                maxY: 16000,
+                maxY: 3500,
 
                 lineTouchData: LineTouchData(
                   handleBuiltInTouches: true,
