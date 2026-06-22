@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:app/models/transaction.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:app/utils/responsive.dart';
+import 'package:intl/intl.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -175,7 +176,7 @@ class DashboardPage extends StatelessWidget {
                         style: const TextStyle(color: Colors.white),
                       ),
                       trailing: Text(
-                        "${t.isIncome ? "+" : "-"}¥${t.amount.abs().toInt()}",
+                        "${t.isIncome ? "+" : "-"}¥${NumberFormat('#,###').format(t.amount.abs())}",
                         style: const TextStyle(color: Colors.white),
                       ),
                     );

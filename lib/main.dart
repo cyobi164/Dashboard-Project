@@ -1,5 +1,6 @@
 import 'package:app/pages/dash_board.dart';
 import 'package:flutter/material.dart';
+import 'package:app/pages/transaction_page.dart';
 
 void main() {
   runApp(const Myapp());
@@ -116,7 +117,7 @@ class _MyappState extends State<Myapp> {
       case 1:
         return const Center(child: Text("Wallet Page"));
       case 2:
-        return const Center(child: Text("Transactions Page"));
+        return const TransactionPage();
       case 3:
         return const Center(child: Text("Receipts Page"));
       case 4:
