@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:app/models/transaction.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:app/utils/responsive.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
@@ -63,11 +64,15 @@ class DashboardPage extends StatelessWidget {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
 
-              gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 420,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: Responsive.isMobile(context)
+                    ? 1
+                    : Responsive.isTablet(context)
+                        ? 2
+                        : 3,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
-                childAspectRatio: 2.2,
+                childAspectRatio: 2.2
               ),
 
               itemCount: titles.length,
