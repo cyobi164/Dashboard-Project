@@ -22,9 +22,9 @@ class DashboardPage extends StatelessWidget {
     ];
 
     final transactions = [
-      Transaction(title: "Food", amount: -3500, isIncome: false),
-      Transaction(title: "Netflix", amount: -1200, isIncome: false),
-      Transaction(title: "Salary", amount: 200000, isIncome: true),
+      Transaction(title: "Food", amount: -3500, isIncome: false, date: "Jan 5"),
+      Transaction(title: "Netflix", amount: -1200, isIncome: false, date: "Feb 20"),
+      Transaction(title: "Salary", amount: 200000, isIncome: true, date: "Mar 25"),
     ];
 
     return Container(

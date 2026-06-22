@@ -8,12 +8,12 @@ class TransactionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final transactions = [
-      Transaction(title: "Food", amount: -3500, isIncome: false),
-      Transaction(title: "Netflix", amount: -1200, isIncome: false),
-      Transaction(title: "Salary", amount: 200000, isIncome: true),
-      Transaction(title: "Coffee", amount: -450, isIncome: false),
-      Transaction(title: "Conbini", amount: 500, isIncome: false),
-      Transaction(title: "Friend A", amount: 5000, isIncome: true),
+      Transaction(title: "Food", amount: -3500, isIncome: false, date: "Jan 5"),
+      Transaction(title: "Netflix", amount: -1200, isIncome: false, date: "Feb 20"),
+      Transaction(title: "Salary", amount: 200000, isIncome: true, date: "Mar 25"), 
+      Transaction(title: "Coffee", amount: -450, isIncome: false, date: "Mar 26"),
+      Transaction(title: "Conbini", amount: -500, isIncome: false, date: "Apr 1"),
+      Transaction(title: "Friend A", amount: 5000, isIncome: true, date: "Apr 10"),
     ];
 
     return Scaffold(
@@ -35,6 +35,7 @@ class TransactionPage extends StatelessWidget {
           final t = transactions[index];
 
           return Card(
+            margin: const EdgeInsets.symmetric(vertical: 6),
             color: const Color(0xFF1E293B),
 
             child: ListTile(
@@ -51,6 +52,11 @@ class TransactionPage extends StatelessWidget {
                   color: t.isIncome ? Colors.green : Colors.red,
                   fontWeight: FontWeight.bold,
                 ),
+              ),
+
+              subtitle: Text(
+                t.date,
+                style: const TextStyle(color: Colors.grey),
               ),
             ),
           );
