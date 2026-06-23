@@ -1,6 +1,7 @@
 import 'package:app/pages/dash_board.dart';
 import 'package:flutter/material.dart';
 import 'package:app/pages/transaction_page.dart';
+import 'package:app/pages/wallet_page.dart';
 
 void main() {
   runApp(const Myapp());
@@ -29,27 +30,21 @@ class _MyappState extends State<Myapp> {
       },
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-        color: isSelected
-         ? const Color(0xFF1E293B)
-          : Colors.transparent,
+        color: isSelected ? const Color(0xFF1E293B) : Colors.transparent,
 
         child: Row(
           children: [
-            Icon(icon, 
-            color: isSelected
-             ? const Color(0xFF818CF8) 
-             : Colors.white70),
+            Icon(
+              icon,
+              color: isSelected ? const Color(0xFF818CF8) : Colors.white70,
+            ),
             const SizedBox(width: 10),
-            
+
             Text(
               title,
               style: TextStyle(
-                color: isSelected
-                 ? const Color(0xFF818CF8)
-                  : Colors.white70,
-                fontWeight: isSelected
-                 ? FontWeight.bold
-                  : FontWeight.normal,
+                color: isSelected ? const Color(0xFF818CF8) : Colors.white70,
+                fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
               ),
             ),
           ],
@@ -115,7 +110,7 @@ class _MyappState extends State<Myapp> {
       case 0:
         return const DashboardPage();
       case 1:
-        return const Center(child: Text("Wallet Page"));
+        return const Wallet();
       case 2:
         return const TransactionPage();
       case 3:
