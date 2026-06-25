@@ -1,39 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:app/models/receipt.dart';
 import 'package:intl/intl.dart';
+import 'package:app/data/app_data.dart';
 
 class ReceiptPage extends StatelessWidget {
   const ReceiptPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final recepits = [
-      Receipt(
-        shop: "7-Eleven",
-        amount: 1000,
-        date: "Mar 1",
-        receiptNo: "10012",
-      ),
-
-      Receipt(
-        shop: "McDonald's",
-        amount: 3000,
-        date: "Jun 30",
-        receiptNo: "11093",
-      ),
-
-      Receipt(
-        shop: "Amazon",
-        amount: 30000,
-        date: "Apr 23",
-        receiptNo: "11673",
-      ),
-
-      Receipt(shop: "GU", amount: 3000, date: "Jan 12", receiptNo: "12884"),
-    ];
-
-    final total = recepits.fold(0.0, (sum, recepits) => sum + recepits.amount);
-
     return Scaffold(
       backgroundColor: const Color(0xff030617),
 

@@ -1,20 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:app/models/transaction.dart';
+import 'package:app/data/app_data.dart';
 
 class TransactionPage extends StatelessWidget {
   const TransactionPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final transactions = [
-      Transaction(title: "Food", amount: -3500, isIncome: false, date: "Jan 5"),
-      Transaction(title: "Netflix", amount: -1200, isIncome: false, date: "Feb 20"),
-      Transaction(title: "Salary", amount: 200000, isIncome: true, date: "Mar 25"), 
-      Transaction(title: "Coffee", amount: -450, isIncome: false, date: "Mar 26"),
-      Transaction(title: "Conbini", amount: -500, isIncome: false, date: "Apr 1"),
-      Transaction(title: "Friend A", amount: 5000, isIncome: true, date: "Apr 10"),
-    ];
+
 
     return Scaffold(
       backgroundColor: const Color(0xFF020617),

@@ -11,3 +11,5 @@ class Receipt {
     required this.receiptNo,
   });
 }
+
+
