@@ -61,7 +61,8 @@ class _MyappState extends State<Myapp> {
       backgroundColor: const Color(0xFF071227),
       child: ListView(
         children: [
-          const DrawerHeader(
+          const Padding(
+            padding: EdgeInsets.all(20),
             child: Text(
               "Menu",
               style: TextStyle(
@@ -78,8 +79,11 @@ class _MyappState extends State<Myapp> {
               style: TextStyle(color: Colors.white),
             ),
             onTap: () {
-              setState(() => selectedIndex = 0);
-              Navigator.pop(context);
+              setState(() {
+                selectedIndex = 0;
+              });
+
+              //Navigator.of(context).pop();
             },
           ),
 
@@ -90,8 +94,11 @@ class _MyappState extends State<Myapp> {
             ),
             title: const Text("Wallet", style: TextStyle(color: Colors.white)),
             onTap: () {
-              setState(() => selectedIndex = 1);
-              Navigator.pop(context);
+              setState(() {
+                selectedIndex = 1;
+              });
+
+              //Navigator.of(context).pop();
             },
           ),
 
@@ -102,8 +109,11 @@ class _MyappState extends State<Myapp> {
               style: TextStyle(color: Colors.white),
             ),
             onTap: () {
-              setState(() => selectedIndex = 2);
-              Navigator.pop(context);
+              setState(() {
+                selectedIndex = 2;
+              });
+
+              //Navigator.of(context).pop();
             },
           ),
 
@@ -113,9 +123,12 @@ class _MyappState extends State<Myapp> {
               "Receipts",
               style: TextStyle(color: Colors.white),
             ),
-            onTap: () {
-              setState(() => selectedIndex = 3);
-              Navigator.pop(context);
+           onTap: () {
+              setState(() {
+                selectedIndex = 3;
+              });
+
+              //Navigator.of(context).pop();
             },
           ),
 
@@ -123,8 +136,11 @@ class _MyappState extends State<Myapp> {
             leading: const Icon(Icons.person, color: Colors.white),
             title: const Text("Profile", style: TextStyle(color: Colors.white)),
             onTap: () {
-              setState(() => selectedIndex = 4);
-              Navigator.pop(context);
+              setState(() {
+                selectedIndex = 4;
+              });
+
+              //Navigator.of(context).pop();
             },
           ),
         ],
@@ -139,48 +155,46 @@ class _MyappState extends State<Myapp> {
       home: Scaffold(
         drawer: Responsive.isMobile(context) ? buildDrawer(context) : null,
         appBar: Responsive.isMobile(context)
-           ? AppBar(
-              backgroundColor: const Color(0xFF071227),
-              iconTheme: const IconThemeData(
-                color: Colors.white,
-              ),
-           )
-          : null,
+            ? AppBar(
+                backgroundColor: const Color(0xFF071227),
+                iconTheme: const IconThemeData(color: Colors.white),
+              )
+            : null,
 
         body: Row(
           children: [
             if (!Responsive.isMobile(context))
-            //sidebar
-            Container(
-              width: 250,
-              color: const Color(0xFF071227),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(height: 40),
+              //sidebar
+              Container(
+                width: 250,
+                color: const Color(0xFF071227),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 40),
 
-                  const Padding(
-                    padding: EdgeInsets.all(16),
-                    child: Text(
-                      "",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                    const Padding(
+                      padding: EdgeInsets.all(16),
+                      child: Text(
+                        "",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
 
-                  const SizedBox(height: 20),
+                    const SizedBox(height: 20),
 
-                  //Menu Items
-                  menuItem(Icons.dashboard, "Dashboard", 0),
-                  menuItem(Icons.account_balance_wallet, "Wallet", 1),
-                  menuItem(Icons.swap_horiz, "Transactions", 2),
-                  menuItem(Icons.receipt, "Receipts", 3),
-                  menuItem(Icons.person, "Profile", 4),
-                ],
+                    //Menu Items
+                    menuItem(Icons.dashboard, "Dashboard", 0),
+                    menuItem(Icons.account_balance_wallet, "Wallet", 1),
+                    menuItem(Icons.swap_horiz, "Transactions", 2),
+                    menuItem(Icons.receipt, "Receipts", 3),
+                    menuItem(Icons.person, "Profile", 4),
+                  ],
+                ),
               ),
-            ),
 
             //main content
             Expanded(
