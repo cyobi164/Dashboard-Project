@@ -69,13 +69,13 @@ class DashboardPage extends StatelessWidget {
 
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: Responsive.isMobile(context)
-                    ? 1
+                    ? 2
                     : Responsive.isTablet(context)
                         ? 2
                         : 3,
                 crossAxisSpacing: 20,
                 mainAxisSpacing: 20,
-                childAspectRatio: 2.2
+                childAspectRatio: Responsive.isMobile(context) ? 1.6 : 2.2,
               ),
 
               itemCount: titles.length,
@@ -113,9 +113,9 @@ class DashboardPage extends StatelessWidget {
                         children: [
                           Text(
                             titles[index],
-                            style: const TextStyle(
+                            style: TextStyle(
                               color: Colors.white70,
-                              fontSize: 18,
+                              fontSize: Responsive.isMobile(context) ? 12 : 18,
                             ),
                           ),
 
@@ -127,7 +127,7 @@ class DashboardPage extends StatelessWidget {
                         amounts[index],
                         style: TextStyle(
                           color: Colors.white,
-                          fontSize: Responsive.isMobile(context) ? 22 : 30,
+                          fontSize: Responsive.isMobile(context) ? 16 : 30,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

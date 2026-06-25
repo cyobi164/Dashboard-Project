@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:app/pages/transaction_page.dart';
 import 'package:app/pages/wallet_page.dart';
 import 'package:app/pages/profile_page.dart';
+import 'package:app/utils/responsive.dart';
 
 void main() {
   runApp(const Myapp());
@@ -55,13 +56,100 @@ class _MyappState extends State<Myapp> {
     );
   }
 
+  Widget buildDrawer(BuildContext context) {
+    return Drawer(
+      backgroundColor: const Color(0xFF071227),
+      child: ListView(
+        children: [
+          const DrawerHeader(
+            child: Text(
+              "Menu",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.dashboard, color: Colors.white),
+            title: const Text(
+              "Dashboard",
+              style: TextStyle(color: Colors.white),
+            ),
+            onTap: () {
+              setState(() => selectedIndex = 0);
+              Navigator.pop(context);
+            },
+          ),
+
+          ListTile(
+            leading: const Icon(
+              Icons.account_balance_wallet,
+              color: Colors.white,
+            ),
+            title: const Text("Wallet", style: TextStyle(color: Colors.white)),
+            onTap: () {
+              setState(() => selectedIndex = 1);
+              Navigator.pop(context);
+            },
+          ),
+
+          ListTile(
+            leading: const Icon(Icons.swap_horiz, color: Colors.white),
+            title: const Text(
+              "Transactions",
+              style: TextStyle(color: Colors.white),
+            ),
+            onTap: () {
+              setState(() => selectedIndex = 2);
+              Navigator.pop(context);
+            },
+          ),
+
+          ListTile(
+            leading: const Icon(Icons.receipt, color: Colors.white),
+            title: const Text(
+              "Receipts",
+              style: TextStyle(color: Colors.white),
+            ),
+            onTap: () {
+              setState(() => selectedIndex = 3);
+              Navigator.pop(context);
+            },
+          ),
+
+          ListTile(
+            leading: const Icon(Icons.person, color: Colors.white),
+            title: const Text("Profile", style: TextStyle(color: Colors.white)),
+            onTap: () {
+              setState(() => selectedIndex = 4);
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        drawer: Responsive.isMobile(context) ? buildDrawer(context) : null,
+        appBar: Responsive.isMobile(context)
+           ? AppBar(
+              backgroundColor: const Color(0xFF071227),
+              iconTheme: const IconThemeData(
+                color: Colors.white,
+              ),
+           )
+          : null,
+
         body: Row(
           children: [
+            if (!Responsive.isMobile(context))
             //sidebar
             Container(
               width: 250,
