@@ -1,35 +1,42 @@
-# Finance Dashboard App
+# 💰 Finance Dashboard (Demo)
 
-A personal finance dashboard built with Flutter.
+A responsive finance dashboard built with Flutter Web.
 
-## Features
+This project is currently a demo version. Some features in the **Profile** page are still under development.
 
-- Dashboard overview
-- Income and expense tracking
-- Interactive charts
-- Recent transaction history
-- Responsive UI design
+> **Note:** The options inside the Profile page are for demonstration purposes and are not yet functional.
 
-## Technologies
+## 🚀 Features
 
-- Flutter
-- Dart
-- fl_chart
+* Dashboard
+* Wallet
+* Transactions
+* Receipts
+* Profile
+* Responsive design for desktop and mobile
 
-## Screenshots
+## 🛠 Built With
 
-(Add screenshots here)
+* Flutter
+* Dart
+* Git
+* GitHub Pages
 
-## About
+## 📸 Screenshot
 
-This project was designed and implemented by me as part of my Flutter learning journey and portfolio development.
+<img width="1879" height="1002" alt="Screenshot (56)" src="https://github.com/user-attachments/assets/2686dfbc-8e54-4a6b-ab17-0cd3cf773242" />
 
-I created the UI, dashboard layout, and chart integration myself, while using AI as a learning and development assistant for guidance and troubleshooting.
 
-## Future Improvements
+## 📚 What I Learned
 
-- Receipt management
-- Budget planning
-- Dark mode
-- Cloud synchronization
-- User authentication
+This project helped me learn:
+
+* Flutter fundamentals
+* Building responsive user interfaces
+* Organizing a Flutter project by separating models, pages, and shared data
+* Keeping UI code clean by storing sample data in a separate data folder
+* Using reusable widgets to reduce duplicate code
+* Thinking from the user's perspective when designing the interface
+* Debugging Flutter applications and understanding error messages
+* Using AI as a learning assistant to understand concepts, review code, and troubleshoot issues while continuing to build and improve the project myself
+
