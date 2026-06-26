@@ -43,17 +43,15 @@ This project helped me learn:
 * Debugging Flutter applications and understanding error messages
 * Using AI as a learning assistant to understand concepts, review code, and troubleshoot issues while continuing to build and improve the project myself
 
-## Future Improvements
+## 🎯 Future Improvements
 
-This project is an ongoing learning project, and I plan to continue 
-improving it over time.
+I plan to continue improving this project by adding more real-world features, including:
 
-- Future Improvements plans:
-・User authentication(login and logout)
-・Multi-language support
-・Database integration
-・Improve Chart
-・Expense analytics
+- User authentication (Login / Logout)
+- Multi-language support
+- Database integration
+- Improved charts and data visualization
+- Expense analytics
 
 ## live Demo
 https://cyobi164.github.io/Dashboard-Project/
