@@ -26,6 +26,8 @@ This project is currently a demo version. Some features in the **Profile** page 
 
 <img width="1879" height="1002" alt="Screenshot (56)" src="https://github.com/user-attachments/assets/2686dfbc-8e54-4a6b-ab17-0cd3cf773242" />
 
+## 📸 Mobile Screenshot
+
 
 ## 📚 What I Learned
 
@@ -39,4 +41,19 @@ This project helped me learn:
 * Thinking from the user's perspective when designing the interface
 * Debugging Flutter applications and understanding error messages
 * Using AI as a learning assistant to understand concepts, review code, and troubleshoot issues while continuing to build and improve the project myself
+
+## Future Improvements
+
+This project is an ongoing learning project, and I plan to continue 
+improving it over time.
+
+- Future Improvements plans:
+・User authentication(login and logout)
+・Multi-language support
+・Database integration
+・Improve Chart
+・Expense analytics
+
+## live Demo
+https://cyobi164.github.io/Dashboard-Project/
 
