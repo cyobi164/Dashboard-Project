@@ -83,7 +83,7 @@ class _MyappState extends State<Myapp> {
                 selectedIndex = 0;
               });
 
-              //Navigator.of(context).pop();
+              Navigator.pop(context);
             },
           ),
 
@@ -98,7 +98,7 @@ class _MyappState extends State<Myapp> {
                 selectedIndex = 1;
               });
 
-              //Navigator.of(context).pop();
+              Navigator.pop(context);
             },
           ),
 
@@ -113,7 +113,7 @@ class _MyappState extends State<Myapp> {
                 selectedIndex = 2;
               });
 
-              //Navigator.of(context).pop();
+              Navigator.pop(context);
             },
           ),
 
@@ -123,12 +123,12 @@ class _MyappState extends State<Myapp> {
               "Receipts",
               style: TextStyle(color: Colors.white),
             ),
-           onTap: () {
+            onTap: () {
               setState(() {
                 selectedIndex = 3;
               });
 
-              //Navigator.of(context).pop();
+              Navigator.pop(context);
             },
           ),
 
@@ -140,7 +140,7 @@ class _MyappState extends State<Myapp> {
                 selectedIndex = 4;
               });
 
-              //Navigator.of(context).pop();
+              Navigator.pop(context);
             },
           ),
         ],
@@ -152,58 +152,60 @@ class _MyappState extends State<Myapp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        drawer: Responsive.isMobile(context) ? buildDrawer(context) : null,
-        appBar: Responsive.isMobile(context)
-            ? AppBar(
-                backgroundColor: const Color(0xFF071227),
-                iconTheme: const IconThemeData(color: Colors.white),
-              )
-            : null,
+      home: Builder(
+        builder: (context) => Scaffold(
+          drawer: Responsive.isMobile(context) ? buildDrawer(context) : null,
+          appBar: Responsive.isMobile(context)
+              ? AppBar(
+                  backgroundColor: const Color(0xFF071227),
+                  iconTheme: const IconThemeData(color: Colors.white),
+                )
+              : null,
 
-        body: Row(
-          children: [
-            if (!Responsive.isMobile(context))
-              //sidebar
-              Container(
-                width: 250,
-                color: const Color(0xFF071227),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 40),
+          body: Row(
+            children: [
+              if (!Responsive.isMobile(context))
+                //sidebar
+                Container(
+                  width: 250,
+                  color: const Color(0xFF071227),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 40),
 
-                    const Padding(
-                      padding: EdgeInsets.all(16),
-                      child: Text(
-                        "",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                      const Padding(
+                        padding: EdgeInsets.all(16),
+                        child: Text(
+                          "",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
 
-                    const SizedBox(height: 20),
+                      const SizedBox(height: 20),
 
-                    //Menu Items
-                    menuItem(Icons.dashboard, "Dashboard", 0),
-                    menuItem(Icons.account_balance_wallet, "Wallet", 1),
-                    menuItem(Icons.swap_horiz, "Transactions", 2),
-                    menuItem(Icons.receipt, "Receipts", 3),
-                    menuItem(Icons.person, "Profile", 4),
-                  ],
+                      //Menu Items
+                      menuItem(Icons.dashboard, "Dashboard", 0),
+                      menuItem(Icons.account_balance_wallet, "Wallet", 1),
+                      menuItem(Icons.swap_horiz, "Transactions", 2),
+                      menuItem(Icons.receipt, "Receipts", 3),
+                      menuItem(Icons.person, "Profile", 4),
+                    ],
+                  ),
+                ),
+
+              //main content
+              Expanded(
+                child: Container(
+                  color: const Color(0xFF0F172A),
+                  child: getPage(),
                 ),
               ),
-
-            //main content
-            Expanded(
-              child: Container(
-                color: const Color(0xFF0F172A),
-                child: getPage(),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
