@@ -28,6 +28,7 @@ This project is currently a demo version. Some features in the **Profile** page 
 
 ## 📸 Mobile Screenshot
 
+<img width="804" height="1428" alt="image" src="https://github.com/user-attachments/assets/1e0c0b77-9bff-4a69-a219-442aae8b7080" />
 
 ## 📚 What I Learned
 
