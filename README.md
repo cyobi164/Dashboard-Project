@@ -1,4 +1,4 @@
-# 💰 Finance Dashboard (Demo)
+# 💰 Finance Dashboard
 
 A responsive finance dashboard built with Flutter Web.
 
@@ -53,6 +53,6 @@ I plan to continue improving this project by adding more real-world features, in
 - Improved charts and data visualization
 - Expense analytics
 
-## live Demo
+## 🌐Live Demo
 https://cyobi164.github.io/Dashboard-Project/
 
