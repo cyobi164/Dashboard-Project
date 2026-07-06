@@ -5,6 +5,7 @@ import 'package:app/pages/transaction_page.dart';
 import 'package:app/pages/wallet_page.dart';
 import 'package:app/pages/profile_page.dart';
 import 'package:app/utils/responsive.dart';
+import 'package:app/features/auth/splash_page.dart';
 
 void main() {
   runApp(const Myapp());
@@ -21,6 +22,19 @@ class _MyappState extends State<Myapp> {
   String name = "";
   final TextEditingController controller = TextEditingController();
   int selectedIndex = 0;
+
+  bool showSplash = true;
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(const Duration(seconds: 2), () {
+      setState(() {
+        showSplash = false;
+      });
+    });
+  }
 
   Widget menuItem(IconData icon, String title, int index) {
     bool isSelected = selectedIndex == index;
@@ -152,7 +166,9 @@ class _MyappState extends State<Myapp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Builder(
+      home: showSplash
+          ? const SplashPage()
+          : Builder(
         builder: (context) => Scaffold(
           drawer: Responsive.isMobile(context) ? buildDrawer(context) : null,
           appBar: Responsive.isMobile(context)
