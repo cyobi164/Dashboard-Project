@@ -6,6 +6,7 @@ class SplashPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFF0F172A),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -13,8 +14,9 @@ class SplashPage extends StatelessWidget {
             const Text(
               "LOGO",
               style: TextStyle(
-                fontSize: 32, 
-                fontWeight: FontWeight.bold
+                fontSize: 32,
+                color: Colors.white, 
+                fontWeight: FontWeight.bold,
                 ),
             ),
 
@@ -22,16 +24,18 @@ class SplashPage extends StatelessWidget {
               "Dashboard (expamle)",
               style: TextStyle(
                 fontSize: 32,
+                color: Colors.white, 
                 fontWeight: FontWeight.bold,
-              ),
+                ),
             ),
 
             const Text(
               "Version 0.01",
               style: TextStyle(
                 fontSize: 32,
-                fontWeight: FontWeight.bold
-              ),
+                color: Colors.white, 
+                fontWeight: FontWeight.bold,
+                ),
             ),
           ],
         ),
