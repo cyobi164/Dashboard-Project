@@ -15,28 +15,37 @@ class SplashPage extends StatelessWidget {
               "LOGO",
               style: TextStyle(
                 fontSize: 32,
-                color: Colors.white, 
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
-                ),
+              ),
             ),
 
             const Text(
-              "Dashboard (expamle)",
+              "Dashboard (example)",
               style: TextStyle(
                 fontSize: 32,
-                color: Colors.white, 
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
-                ),
+              ),
             ),
 
             const Text(
               "Version 0.01",
               style: TextStyle(
                 fontSize: 32,
-                color: Colors.white, 
+                color: Colors.white,
                 fontWeight: FontWeight.bold,
-                ),
+              ),
             ),
+
+            const Text(
+              "Email & Password: user",
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.white70,
+                fontWeight: FontWeight.bold,
+              ),
+            )
           ],
         ),
       ),
