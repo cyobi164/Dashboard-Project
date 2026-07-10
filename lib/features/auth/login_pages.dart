@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:app/features/auth/register_pages.dart';
 
 class LoginPages extends StatefulWidget {
   final VoidCallback onLogin;
@@ -260,7 +261,12 @@ class _LoginPagesState extends State<LoginPages> {
                               ),
                               TextButton(
                                 onPressed: () {
-                                  //handle sign up logic here
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => const RegisterPages(),
+                                    )
+                                  );
                                 },
                                 child: const Text(
                                   "Sign Up",
