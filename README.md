@@ -56,3 +56,19 @@ I plan to continue improving this project by adding more real-world features, in
 ## 🌐Live Demo
 https://cyobi164.github.io/Dashboard-Project/
 
+## 📝 Latest Updates (2026-07-06)
+
+### Added
+
+- Splash Screen
+- Login Screen
+- Demo login authentication
+- Password visibility toggle
+- New `features/auth` folder structure
+
+**Demo Login Credentials**
+
+```
+Email: user
+Password: user
+```
