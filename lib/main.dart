@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:app/features/auth/splash_page.dart';
-import 'package:app/features/auth/login_pages.dart';
 import 'package:app/features/dashboard/dashboard_shell.dart';
+import 'package:app/features/auth/card_flip.dart';
 
 void main() {
   runApp(const Myapp());
@@ -35,11 +35,17 @@ class _MyappState extends State<Myapp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
 
+      theme: ThemeData(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        hoverColor: Colors.transparent,
+      ),
+
       home: showSplash
           ? const SplashPage()
           : isLoggedIn
           ? const DashboardShell()
-          : LoginPages(
+          : CardFlip(
               onLogin: () {
                 setState(() {
                   isLoggedIn = true;
