@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginPages extends StatefulWidget {
@@ -20,6 +21,23 @@ class _LoginPagesState extends State<LoginPages> {
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
+
+  Future<void> _login() async {
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text.trim(),
+        password: passwordController.text,
+      );
+
+      widget.onLogin();
+    } on FirebaseAuthException catch (e) {
+      if (!mounted) return;
+      
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(e.message ?? "Login failed")),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,6 +118,8 @@ class _LoginPagesState extends State<LoginPages> {
 
                       TextField(
                         controller: passwordController,
+                        textInputAction: TextInputAction.done,
+                        onSubmitted: (_) => _login(),
                         obscureText: isPasswordHidden,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
@@ -133,22 +153,11 @@ class _LoginPagesState extends State<LoginPages> {
                       SizedBox(
                         width: double.infinity,
                         child: OutlinedButton(
-                          onPressed: () {
-                            if (emailController.text == "user" &&
-                                passwordController.text == "user") {
-                              widget.onLogin();
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text("Wrong email or password"),
-                                ),
-                              );
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF6366F1),
+                          onPressed: _login,
+                          style: OutlinedButton.styleFrom(
+                            backgroundColor: Color(0xFF6366F1),
                             foregroundColor: Colors.white,
-                            padding: const EdgeInsets.symmetric(vertical: 16),
+                            padding: EdgeInsets.symmetric(vertical: 16),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),

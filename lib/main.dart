@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+import 'firebase_options.dart';
 
 import 'package:app/features/auth/splash_page.dart';
 import 'package:app/features/dashboard/dashboard_shell.dart';
-import 'package:app/features/auth/card_flip.dart';
+import 'package:app/pages/public_page.dart';
 
-void main() {
+// import 'package:app/features/auth/card_flip.dart';
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   runApp(const Myapp());
 }
 
@@ -17,7 +28,9 @@ class Myapp extends StatefulWidget {
 
 class _MyappState extends State<Myapp> {
   bool showSplash = true;
-  bool isLoggedIn = false;
+  bool showPublicPage = true;
+
+  // bool isLoggedIn = false;
 
   @override
   void initState() {
@@ -43,15 +56,15 @@ class _MyappState extends State<Myapp> {
 
       home: showSplash
           ? const SplashPage()
-          : isLoggedIn
-          ? const DashboardShell()
-          : CardFlip(
-              onLogin: () {
-                setState(() {
-                  isLoggedIn = true;
-                });
-              },
-            ),
+          : showPublicPage
+              ? PublicPage(
+                  onOpenDemo: () {
+                    setState(() {
+                      showPublicPage = false;
+                    });
+                  },
+                )
+              : const DashboardShell(),
     );
   }
 }

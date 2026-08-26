@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 
 import 'package:app/pages/dash_board.dart';
-import 'package:app/pages/profile_page.dart';
+//import 'package:app/pages/profile_page.dart';
 import 'package:app/pages/receipt_page.dart';
 import 'package:app/pages/transaction_page.dart';
 import 'package:app/pages/wallet_page.dart';
 import 'package:app/utils/responsive.dart';
+
+//class DashboardShell extends StatefulWidget {
+  //final VoidCallback onLogout;
+
+  //const DashboardShell({super.key, required this.onLogout});
+
+  //@override
+  //State<DashboardShell> createState() => _DashboardShellState();
+//}
 
 class DashboardShell extends StatefulWidget {
   const DashboardShell({super.key});
@@ -122,17 +131,17 @@ class _DashboardShellState extends State<DashboardShell> {
             },
           ),
 
-          ListTile(
-            leading: const Icon(Icons.person, color: Colors.white),
-            title: const Text(
-              "Profile",
-              style: TextStyle(color: Colors.white),
-            ),
-            onTap: () {
-              setState(() => selectedIndex = 4);
-              Navigator.pop(context);
-            },
-          ),
+          //ListTile(
+            //leading: const Icon(Icons.person, color: Colors.white),
+            //title: const Text(
+             // "Profile",
+              //style: TextStyle(color: Colors.white),
+            //),
+            //onTap: () {
+             // setState(() => selectedIndex = 4);
+              //Navigator.pop(context);
+            //},
+          //),
         ],
       ),
     );
@@ -148,8 +157,10 @@ class _DashboardShellState extends State<DashboardShell> {
         return const TransactionPage();
       case 3:
         return const ReceiptPage();
-      case 4:
-        return const ProfilePage();
+      //case 4:
+        //return ProfilePage(
+          //onLogout: widget.onLogout,
+        //);
       default:
         return const DashboardPage();
     }
@@ -190,7 +201,7 @@ class _DashboardShellState extends State<DashboardShell> {
                     menuItem(Icons.account_balance_wallet, "Wallet", 1),
                     menuItem(Icons.swap_horiz, "Transactions", 2),
                     menuItem(Icons.receipt, "Receipts", 3),
-                    menuItem(Icons.person, "Profile", 4),
+                    //menuItem(Icons.person, "Profile", 4),
                   ],
                 ),
               ),

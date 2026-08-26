@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  final VoidCallback onLogout;
+
+  const ProfilePage({super.key, required this.onLogout});
 
   @override
   Widget build(BuildContext context) {
@@ -85,9 +88,13 @@ class ProfilePage extends StatelessWidget {
           const SizedBox(height: 20),
           Card(
             color: const Color(0XFF1E293B),
-            child: const ListTile(
+            child: ListTile(
               leading: Icon(Icons.logout, color: Colors.white),
               title: Text("Logout", style: TextStyle(color: Colors.white)),
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                onLogout();
+              },
             ),
           ),
         ],
