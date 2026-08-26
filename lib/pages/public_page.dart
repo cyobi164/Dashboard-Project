@@ -31,16 +31,6 @@ class PublicPage extends StatelessWidget {
                 const SizedBox(height: 20),
 
                 const Text(
-                  "シンプルなパーソナルファイナンスダッシュボードアプリケーション。",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 18,
-                  ),
-                ),
-
-                const SizedBox (height: 30),
-
-                const Text(
                   "シンプルなパーソナルファイナンスダッシュボードアプリケーション。"
                   "収入や支出、貯蓄などの情報をシンプルに整理し、"
                   "視覚的なダッシュボードから現在の財務状況を直感的に把握できるUI/UXを目指して制作しました。",
