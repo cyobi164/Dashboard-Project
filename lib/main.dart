@@ -12,9 +12,7 @@ import 'package:app/pages/public_page.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(const Myapp());
 }
@@ -57,14 +55,70 @@ class _MyappState extends State<Myapp> {
       home: showSplash
           ? const SplashPage()
           : showPublicPage
-              ? PublicPage(
-                  onOpenDemo: () {
-                    setState(() {
-                      showPublicPage = false;
-                    });
-                  },
-                )
-              : const DashboardShell(),
+          ? PublicPage(
+              onOpenDemo: () {
+                setState(() {
+                  showPublicPage = false;
+                });
+              },
+            )
+          : const DashboardShell(),
+
+      //home: showSplash
+
+      //? const SplashPage()
+
+      //: showPublicPage
+
+      //? const Scaffold(
+
+      //backgroundColor: Colors.red,
+
+      //body: Center(
+
+      //  child: Text(
+
+      //  "PUBLIC PAGE TEST",
+
+      //  style: TextStyle(color: Colors.white, fontSize: 40),
+
+      // ),
+
+      // ),
+
+      //)
+
+      //: isLoggedIn
+
+      //? DashboardShell(
+
+      //onLogout: () {
+
+      //setState(() {
+
+      //isLoggedIn = false;
+
+      //showPublicPage = true;
+
+      //});
+
+      //},
+
+      //)
+
+      //: CardFlip(
+
+      //onLogin: () {
+
+      //setState(() {
+
+      //isLoggedIn = true;
+
+      //});
+
+      //},
+
+      //),
     );
   }
 }
