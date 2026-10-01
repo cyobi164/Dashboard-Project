@@ -170,6 +170,7 @@ class _DashboardShellState extends State<DashboardShell> {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) => Scaffold(
+        backgroundColor: const Color(0xFF020617),
         drawer: Responsive.isMobile(context)
             ? buildDrawer(context)
             : null,
@@ -208,7 +209,7 @@ class _DashboardShellState extends State<DashboardShell> {
 
             Expanded(
               child: Container(
-                color: const Color(0xFF0F172A),
+                color: const Color(0xFF020617),
                 child: getPage(),
               ),
             ),
