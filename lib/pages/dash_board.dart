@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 import 'dart:math' as math;
@@ -46,40 +45,12 @@ class _DashboardPageState extends State<DashboardPage> {
   @override
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
-=======
-import 'package:app/models/transaction.dart';
-import 'package:fl_chart/fl_chart.dart';
-import 'package:app/utils/responsive.dart';
-import 'package:intl/intl.dart';
-
-class DashboardPage extends StatelessWidget {
-  const DashboardPage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final transactions = [
-      Transaction(title: "Food", amount: -3500, isIncome: false, date: "Jan 5"),
-      Transaction(
-        title: "Netflix",
-        amount: -1200,
-        isIncome: false,
-        date: "Feb 20",
-      ),
-      Transaction(
-        title: "Salary",
-        amount: 200000,
-        isIncome: true,
-        date: "Mar 25",
-      ),
-    ];
->>>>>>> origin/main
 
     return Container(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-<<<<<<< HEAD
           colors: [
             Color(0xFF020617),
             Color(0xFF08122D),
@@ -193,99 +164,6 @@ class DashboardPage extends StatelessWidget {
                     ],
                   ],
                 ),
-=======
-          colors: [Color(0xFF020617), Color(0xFF08122D), Color(0xFF020617)],
-        ),
-      ),
-      child: SingleChildScrollView(
-        padding: EdgeInsets.all(Responsive.isMobile(context) ? 12 : 24),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // =========================
-            // HEADER
-            // =========================
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Dashboard",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    const Text(
-                      "Good evening 👋",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 17,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      "Overview.",
-                      style: TextStyle(
-                        color: Colors.white.withValues(alpha: 0.5),
-                        fontSize: 14,
-                      ),
-                    ),
-                  ],
-                ),
-
-                // Month Selector
-                GestureDetector(
-                  onTap: () {
-                    // calander popup
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 14,
-                      vertical: 10,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF1E293B),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: Colors.white.withValues(alpha: 0.08),
-                      ),
-                    ),
-                    child: const Row(
-                      children: [
-                        Icon(
-                          Icons.calendar_month_outlined,
-                          color: Colors.white70,
-                          size: 18,
-                        ),
-                        SizedBox(width: 8),
-                        Text(
-                          "September",
-                          style: TextStyle(
-                            color: Colors.white70,
-                            fontSize: 15,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(width: 6),
-                        Icon(
-                          Icons.keyboard_arrow_down,
-                          color: Colors.white70,
-                          size: 20,
-                        ),
-                      ]
-                    )
-
-                  )
-                )
-                
->>>>>>> origin/main
               ],
             ),
 
@@ -429,7 +307,6 @@ class DashboardPage extends StatelessWidget {
                   ),
                 ],
               ),
-=======
             // =========================
             // SUMMARY CARDS
             // =========================
@@ -613,7 +490,6 @@ class DashboardPage extends StatelessWidget {
       ),
     );
   }
-<<<<<<< HEAD
 
   // ================================================
   // CUSTOM CALENDAR
@@ -779,8 +655,6 @@ class DashboardPage extends StatelessWidget {
       ),
     );
   }
-=======
->>>>>>> origin/main
 }
 
 // ======================================================
@@ -819,10 +693,6 @@ class _SummaryCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-<<<<<<< HEAD
-=======
-          // Title + Icon
->>>>>>> origin/main
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -834,24 +704,16 @@ class _SummaryCard extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 ),
               ),
-<<<<<<< HEAD
               Icon(
                 icon,
                 color: Colors.white70,
                 size: 20,
               ),
-=======
-              Icon(icon, color: Colors.white.withValues(alpha: 0.75), size: 20),
->>>>>>> origin/main
             ],
           ),
 
           const SizedBox(height: 24),
 
-<<<<<<< HEAD
-=======
-          // Amount
->>>>>>> origin/main
           Text(
             amount,
             style: const TextStyle(
@@ -863,10 +725,6 @@ class _SummaryCard extends StatelessWidget {
 
           const SizedBox(height: 8),
 
-<<<<<<< HEAD
-=======
-          // Subtitle
->>>>>>> origin/main
           Text(
             subtitle,
             style: TextStyle(
@@ -895,13 +753,9 @@ class SavingsChart extends StatelessWidget {
       decoration: BoxDecoration(
         color: const Color(0xFF111827),
         borderRadius: BorderRadius.circular(20),
-<<<<<<< HEAD
         border: Border.all(
           color: Colors.white.withValues(alpha: 0.06),
         ),
-=======
-        border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
->>>>>>> origin/main
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -910,25 +764,17 @@ class SavingsChart extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-<<<<<<< HEAD
                 'Savings',
-=======
-                "Savings",
->>>>>>> origin/main
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-<<<<<<< HEAD
               Icon(
                 Icons.more_vert,
                 color: Colors.white.withValues(alpha: 0.6),
               ),
-=======
-              Icon(Icons.more_vert, color: Colors.white.withValues(alpha: 0.6)),
->>>>>>> origin/main
             ],
           ),
 
@@ -963,28 +809,17 @@ class SavingsChart extends StatelessWidget {
 
                 Column(
                   mainAxisSize: MainAxisSize.min,
-<<<<<<< HEAD
                   children: const [
                     Text(
                       '10%',
-=======
-                  children: [
-                    const Text(
-                      "10%",
->>>>>>> origin/main
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-<<<<<<< HEAD
                     Text(
                       '¥100,000',
-=======
-                    const Text(
-                      "¥100,000",
->>>>>>> origin/main
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 15,
@@ -999,7 +834,6 @@ class SavingsChart extends StatelessWidget {
 
           const SizedBox(height: 8),
 
-<<<<<<< HEAD
           Text(
             'Savings Goal',
             style: TextStyle(
@@ -1017,30 +851,6 @@ class SavingsChart extends StatelessWidget {
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
-=======
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Savings Goal",
-                style: TextStyle(
-                  color: Colors.white.withValues(alpha: 0.5),
-                  fontSize: 12,
-                ),
-              ),
-
-              const SizedBox(height: 4),
-
-              const Text(
-                "¥1,000,000",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
->>>>>>> origin/main
           ),
 
           const SizedBox(height: 16),
@@ -1054,11 +864,7 @@ class SavingsChart extends StatelessWidget {
             ),
             child: FractionallySizedBox(
               alignment: Alignment.centerLeft,
-<<<<<<< HEAD
               widthFactor: 0.1,
-=======
-              widthFactor: 0.1, // 10% progress
->>>>>>> origin/main
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.cyanAccent,
@@ -1074,7 +880,6 @@ class SavingsChart extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton.icon(
               onPressed: () {},
-<<<<<<< HEAD
               icon: const Icon(
                 Icons.add,
                 size: 18,
@@ -1086,14 +891,6 @@ class SavingsChart extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(
                   vertical: 14,
                 ),
-=======
-              icon: const Icon(Icons.add, size: 18),
-              label: const Text("Add Savings"),
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.cyanAccent,
-                foregroundColor: Colors.black,
-                padding: const EdgeInsets.symmetric(vertical: 14),
->>>>>>> origin/main
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -1107,7 +904,6 @@ class SavingsChart extends StatelessWidget {
 }
 
 // ======================================================
-<<<<<<< HEAD
 // RECENT TRANSACTIONS
 // ======================================================
 
@@ -1200,13 +996,6 @@ class SpendingChart extends StatelessWidget {
     'jan', 'feb', 'mar', 'apr', 'may', 'jun',
     'jul', 'aug', 'sep', 'oct', 'nov', 'dec',
   ];
-=======
-// SPENDING CHART
-// ======================================================
-
-class SpendingChart extends StatelessWidget {
-  const SpendingChart({super.key});
->>>>>>> origin/main
 
   @override
   Widget build(BuildContext context) {
@@ -1218,11 +1007,7 @@ class SpendingChart extends StatelessWidget {
         color: const Color(0xFF111827),
         boxShadow: [
           BoxShadow(
-<<<<<<< HEAD
             color: const Color(0xFF00E5FF).withValues(alpha: 0.15),
-=======
-            color: const Color(0xFF00E5FF).withValues(alpha: 0.35),
->>>>>>> origin/main
             blurRadius: 25,
             offset: const Offset(0, 8),
           ),
@@ -1232,11 +1017,7 @@ class SpendingChart extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-<<<<<<< HEAD
             'Spending Over Time',
-=======
-            "Spending Over Time",
->>>>>>> origin/main
             style: TextStyle(
               color: Colors.white,
               fontSize: 22,
@@ -1246,11 +1027,7 @@ class SpendingChart extends StatelessWidget {
 
           const SizedBox(height: 12),
 
-<<<<<<< HEAD
           // Chart legend
-=======
-          // Chart Legend
->>>>>>> origin/main
           Row(
             children: [
               Container(
@@ -1262,14 +1039,10 @@ class SpendingChart extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-<<<<<<< HEAD
               const Text(
                 'Income',
                 style: TextStyle(color: Colors.white70),
               ),
-=======
-              const Text("Income", style: TextStyle(color: Colors.white70)),
->>>>>>> origin/main
               const SizedBox(width: 24),
               Container(
                 width: 10,
@@ -1280,21 +1053,16 @@ class SpendingChart extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-<<<<<<< HEAD
               const Text(
                 'Expense',
                 style: TextStyle(color: Colors.white70),
               ),
-=======
-              const Text("Expense", style: TextStyle(color: Colors.white70)),
->>>>>>> origin/main
             ],
           ),
 
           const SizedBox(height: 8),
 
           Expanded(
-<<<<<<< HEAD
             child: LineChart(
               LineChartData(
                 minX: 0,
@@ -1408,321 +1176,10 @@ class SpendingChart extends StatelessWidget {
                   ),
                 ],
               ),
-=======
-            child: Stack(
-              children: [
-                // Background bars
-                BarChart(
-                  BarChartData(
-                    minY: 0,
-                    maxY: 3500,
-                    borderData: FlBorderData(show: false),
-                    gridData: FlGridData(show: false),
-
-                    titlesData: const FlTitlesData(
-                      leftTitles: AxisTitles(
-                        sideTitles: SideTitles(showTitles: false),
-                      ),
-                      rightTitles: AxisTitles(
-                        sideTitles: SideTitles(showTitles: false),
-                      ),
-                      topTitles: AxisTitles(
-                        sideTitles: SideTitles(showTitles: false),
-                      ),
-                      bottomTitles: AxisTitles(
-                        sideTitles: SideTitles(showTitles: false),
-                      ),
-                    ),
-
-                    barGroups: [
-                      BarChartGroupData(
-                        x: 0,
-                        barRods: [
-                          BarChartRodData(
-                            toY: 1200,
-                            color: Colors.cyanAccent.withValues(alpha: 0.05),
-                            width: 18,
-                            borderRadius: BorderRadius.zero,
-                          ),
-                        ],
-                      ),
-                      BarChartGroupData(
-                        x: 1,
-                        barRods: [
-                          BarChartRodData(
-                            toY: 1700,
-                            color: Colors.cyanAccent.withValues(alpha: 0.05),
-                            width: 18,
-                            borderRadius: BorderRadius.zero,
-                          ),
-                        ],
-                      ),
-                      BarChartGroupData(
-                        x: 2,
-                        barRods: [
-                          BarChartRodData(
-                            toY: 1400,
-                            color: Colors.cyanAccent.withValues(alpha: 0.05),
-                            width: 18,
-                            borderRadius: BorderRadius.zero,
-                          ),
-                        ],
-                      ),
-                      BarChartGroupData(
-                        x: 3,
-                        barRods: [
-                          BarChartRodData(
-                            toY: 2100,
-                            color: Colors.cyanAccent.withValues(alpha: 0.05),
-                            width: 18,
-                            borderRadius: BorderRadius.zero,
-                          ),
-                        ],
-                      ),
-                      BarChartGroupData(
-                        x: 4,
-                        barRods: [
-                          BarChartRodData(
-                            toY: 1800,
-                            color: Colors.cyanAccent.withValues(alpha: 0.05),
-                            width: 18,
-                            borderRadius: BorderRadius.zero,
-                          ),
-                        ],
-                      ),
-                      BarChartGroupData(
-                        x: 5,
-                        barRods: [
-                          BarChartRodData(
-                            toY: 2500,
-                            color: Colors.cyanAccent.withValues(alpha: 0.05),
-                            width: 18,
-                            borderRadius: BorderRadius.zero,
-                          ),
-                        ],
-                      ),
-                      BarChartGroupData(
-                        x: 6,
-                        barRods: [
-                          BarChartRodData(
-                            toY: 2300,
-                            color: Colors.cyanAccent.withValues(alpha: 0.05),
-                            width: 18,
-                            borderRadius: BorderRadius.zero,
-                          ),
-                        ],
-                      ),
-                      BarChartGroupData(
-                        x: 7,
-                        barRods: [
-                          BarChartRodData(
-                            toY: 1700,
-                            color: Colors.cyanAccent.withValues(alpha: 0.05),
-                            width: 18,
-                            borderRadius: BorderRadius.zero,
-                          ),
-                        ],
-                      ),
-                      BarChartGroupData(
-                        x: 8,
-                        barRods: [
-                          BarChartRodData(
-                            toY: 1800,
-                            color: Colors.cyanAccent.withValues(alpha: 0.05),
-                            width: 18,
-                            borderRadius: BorderRadius.zero,
-                          ),
-                        ],
-                      ),
-                      BarChartGroupData(
-                        x: 9,
-                        barRods: [
-                          BarChartRodData(
-                            toY: 1750,
-                            color: Colors.cyanAccent.withValues(alpha: 0.05),
-                            width: 18,
-                            borderRadius: BorderRadius.zero,
-                          ),
-                        ],
-                      ),
-                      BarChartGroupData(
-                        x: 10,
-                        barRods: [
-                          BarChartRodData(
-                            toY: 2000,
-                            color: Colors.cyanAccent.withValues(alpha: 0.05),
-                            width: 18,
-                            borderRadius: BorderRadius.zero,
-                          ),
-                        ],
-                      ),
-                      BarChartGroupData(
-                        x: 11,
-                        barRods: [
-                          BarChartRodData(
-                            toY: 2450,
-                            color: Colors.cyanAccent.withValues(alpha: 0.05),
-                            width: 18,
-                            borderRadius: BorderRadius.zero,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-
-                // Your existing line chart
-                LineChart(
-                  LineChartData(
-                    minX: 0,
-                    maxX: 11,
-                    minY: 0,
-                    maxY: 3500,
-
-                    lineTouchData: LineTouchData(
-                      handleBuiltInTouches: true,
-                      touchTooltipData: LineTouchTooltipData(
-                        getTooltipItems: (spots) {
-                          return spots.map((spot) {
-                            return LineTooltipItem(
-                              spot.barIndex == 0
-                                  ? "Income\n¥${spot.y.toInt()}"
-                                  : "Expense\n¥${spot.y.toInt()}",
-                              TextStyle(
-                                color: spot.barIndex == 0
-                                    ? Colors.cyanAccent
-                                    : Colors.pinkAccent,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            );
-                          }).toList();
-                        },
-                      ),
-                    ),
-
-                    gridData: FlGridData(
-                      show: true,
-                      drawVerticalLine: false,
-                      horizontalInterval: 500,
-                      getDrawingHorizontalLine: (value) {
-                        return FlLine(
-                          color: Colors.white.withValues(alpha: 0.08),
-                          strokeWidth: 1,
-                        );
-                      },
-                    ),
-
-                    borderData: FlBorderData(show: false),
-
-                    titlesData: FlTitlesData(
-                      leftTitles: const AxisTitles(
-                        sideTitles: SideTitles(showTitles: false),
-                      ),
-                      topTitles: const AxisTitles(
-                        sideTitles: SideTitles(showTitles: false),
-                      ),
-                      rightTitles: const AxisTitles(
-                        sideTitles: SideTitles(showTitles: false),
-                      ),
-                      bottomTitles: AxisTitles(
-                        sideTitles: SideTitles(
-                          showTitles: true,
-                          interval: 1,
-                          getTitlesWidget: (value, meta) {
-                            const months = [
-                              "jan",
-                              "feb",
-                              "mar",
-                              "apr",
-                              "may",
-                              "jun",
-                              "jul",
-                              "aug",
-                              "sep",
-                              "oct",
-                              "nov",
-                              "dec",
-                            ];
-
-                            if (value.toInt() < 0 ||
-                                value.toInt() >= months.length) {
-                              return const SizedBox();
-                            }
-
-                            return Padding(
-                              padding: const EdgeInsets.only(top: 8),
-                              child: Text(
-                                months[value.toInt()],
-                                style: const TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-
-                    lineBarsData: [
-                      LineChartBarData(
-                        isCurved: true,
-                        color: Colors.cyanAccent,
-                        barWidth: 4,
-                        dotData: const FlDotData(show: true),
-                        spots: const [
-                          FlSpot(0, 1200),
-                          FlSpot(1, 1700),
-                          FlSpot(2, 1400),
-                          FlSpot(3, 2100),
-                          FlSpot(4, 1800),
-                          FlSpot(5, 2500),
-                          FlSpot(6, 2300),
-                          FlSpot(7, 1700),
-                          FlSpot(8, 1800),
-                          FlSpot(9, 1750),
-                          FlSpot(10, 2000),
-                          FlSpot(11, 2450),
-                        ],
-                        belowBarData: BarAreaData(
-                          show: true,
-                          color: Colors.cyanAccent.withValues(alpha: 0.15),
-                        ),
-                      ),
-
-                      LineChartBarData(
-                        isCurved: true,
-                        color: Colors.pinkAccent,
-                        barWidth: 4,
-                        dotData: const FlDotData(show: true),
-                        spots: const [
-                          FlSpot(0, 900),
-                          FlSpot(1, 1100),
-                          FlSpot(2, 1000),
-                          FlSpot(3, 1400),
-                          FlSpot(4, 1300),
-                          FlSpot(5, 1600),
-                          FlSpot(6, 1500),
-                          FlSpot(7, 2000),
-                          FlSpot(8, 1500),
-                          FlSpot(9, 2500),
-                          FlSpot(10, 300),
-                          FlSpot(11, 2890),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
->>>>>>> origin/main
             ),
           ),
         ],
       ),
     );
   }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/main
