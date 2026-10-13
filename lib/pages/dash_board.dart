@@ -282,7 +282,10 @@ class _DashboardPageState extends State<DashboardPage> {
                   const SizedBox(width: 16),
                   Expanded(
                     flex: 1,
-                    child: _RecentTransactions(transactions: _transactions),
+                    child: SizedBox(
+                      height: 450,
+                      child: _RecentTransactions(transactions: _transactions),
+                    ),
                   ),
                 ],
               ),
@@ -594,7 +597,7 @@ class SavingsChart extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Â¥100,000',
+                      '¥100,000',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 15,
@@ -620,7 +623,7 @@ class SavingsChart extends StatelessWidget {
           const SizedBox(height: 4),
 
           const Text(
-            'Â¥1,000,000',
+            '¥1,000,000',
             style: TextStyle(
               color: Colors.white,
               fontSize: 16,
@@ -693,15 +696,29 @@ class _RecentTransactions extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Recent Transactions',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-            ),
+          Row(
+            children:[
+              const Text(
+                'Recent Transactions',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  //later
+                },
+                child: Text(
+                  "View more",
+                  style: TextStyle(
+                    color: Colors.cyanAccent,
+                  )
+                ),
+              ),
+            ],
           ),
-
           const SizedBox(height: 16),
 
           ...transactions.map((transaction) {
@@ -716,7 +733,7 @@ class _RecentTransactions extends StatelessWidget {
                 style: const TextStyle(color: Colors.white),
               ),
               trailing: Text(
-                '${transaction.isIncome ? '+' : '-'}Â¥${NumberFormat('#,###').format(transaction.amount.abs())}',
+                '${transaction.isIncome ? '+' : '-'}¥${NumberFormat('#,###').format(transaction.amount.abs())}',
                 style: TextStyle(
                   color: transaction.isIncome
                       ? Colors.greenAccent
