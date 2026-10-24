@@ -161,7 +161,7 @@ class _DashboardPageState extends State<DashboardPage> {
             // ==========================================
             // SUMMARY CARDS
             // ==========================================
-            if (isMobile)
+            if (MediaQuery.of(context).size.width < 900)
               Column(
                 children: [
                   _SummaryCard(
@@ -253,42 +253,75 @@ class _DashboardPageState extends State<DashboardPage> {
             // ==========================================
             // CHARTS AND RECENT TRANSACTIONS
             // ==========================================
-            if (isMobile)
-              Column(
-                children: [
-                  const SavingsChart(),
-                  const SizedBox(height: 24),
-                  SpendingChart(selectedMonth: _selectedMonth),
-                  const SizedBox(height: 24),
-                  _RecentTransactions(transactions: _transactions),
-                ],
-              )
-            else
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: SizedBox(
-                      height: 450,
-                      child: SpendingChart(selectedMonth: _selectedMonth),
+            // ==========================================
+            // CHARTS, RECENT TRANSACTIONS AND UPCOMING BILLS
+            // ==========================================
+            LayoutBuilder(
+              builder: (context, constraints) {
+                // Narrow screens: stack cards vertically.
+                if (constraints.maxWidth < 1100) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      SpendingChart(selectedMonth: _selectedMonth),
+                      const SizedBox(height: 16),
+                      const SavingsChart(),
+                      const SizedBox(height: 16),
+                      _RecentTransactions(transactions: _transactions),
+                      const SizedBox(height: 16),
+                      const _UpcomingBills(),
+                    ],
+                  );
+                }
+
+                // Desktop: display three columns.
+                return Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Column 1: Spending chart
+                    Expanded(
+                      flex: 2,
+                      child: SizedBox(
+                        height: 450,
+                        child: SpendingChart(selectedMonth: _selectedMonth),
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    flex: 1,
-                    child: SizedBox(height: 450, child: const SavingsChart()),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    flex: 1,
-                    child: SizedBox(
-                      height: 450,
-                      child: _RecentTransactions(transactions: _transactions),
+
+                    const SizedBox(width: 16),
+
+                    // Column 2: Savings chart
+                    const Expanded(
+                      flex: 1,
+                      child: SizedBox(height: 450, child: SavingsChart()),
                     ),
-                  ),
-                ],
-              ),
+
+                    const SizedBox(width: 16),
+
+                    // Column 3: Transactions and bills.
+                    // Use fixed heights instead of Expanded here.
+                    // This avoids the unbounded-height RenderFlex error.
+                    Expanded(
+                      flex: 1,
+                      child: SizedBox(
+                        height: 450,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 240,
+                              child: _RecentTransactions(
+                                transactions: _transactions,
+                              ),
+                            ),
+                            const SizedBox(height: 16),
+                            const Expanded(child: _UpcomingBills()),
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                );
+              },
+            ),
           ],
         ),
       ),
@@ -697,7 +730,7 @@ class _RecentTransactions extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            children:[
+            children: [
               const Text(
                 'Recent Transactions',
                 style: TextStyle(
@@ -712,9 +745,7 @@ class _RecentTransactions extends StatelessWidget {
                 },
                 child: Text(
                   "View more",
-                  style: TextStyle(
-                    color: Colors.cyanAccent,
-                  )
+                  style: TextStyle(color: Colors.cyanAccent),
                 ),
               ),
             ],
@@ -745,6 +776,171 @@ class _RecentTransactions extends StatelessWidget {
           }),
         ],
       ),
+    );
+  }
+}
+
+// ======================================================
+// Upcoming Bills
+// ======================================================
+
+class _UpcomingBills extends StatelessWidget {
+  const _UpcomingBills();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: const Color(0xFF1E293B),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Upcoming Bills',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Icon(
+                Icons.receipt_long_outlined,
+                color: Colors.white.withValues(alpha: 0.6),
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  _billRow(
+                    icon: Icons.home_outlined,
+                    title: 'Rent',
+                    amount: '¥124,000',
+                    dueDate: 'Due: 2026-10-10',
+                    color: Colors.orangeAccent,
+                  ),
+                  const Divider(color: Colors.white12, height: 12),
+
+                  _billRow(
+                    icon: Icons.electric_bolt_outlined,
+                    title: 'Electricity',
+                    amount: '¥8,500',
+                    dueDate: 'Due: 2026-10-20',
+                    color: Colors.yellowAccent,
+                  ),
+                  const Divider(color: Colors.white12, height: 12),
+
+                  _billRow(
+                    icon: Icons.water_drop_outlined,
+                    title: 'Water',
+                    amount: '¥5,200',
+                    dueDate: 'Due: 2026-10-25',
+                    color: Colors.blueAccent,
+                  ),
+                  const Divider(color: Colors.white12, height: 12),
+
+                  _billRow(
+                    icon: Icons.wifi_outlined,
+                    title: 'Internet',
+                    amount: '¥6,040',
+                    dueDate: 'Due: 2026-10-30',
+                    color: Colors.purpleAccent,
+                  ),
+                  const Divider(color: Colors.white12, height: 12),
+
+                  _billRow(
+                    icon: Icons.phone_android_outlined,
+                    title: 'Mobile',
+                    amount: '¥14,500',
+                    dueDate: 'Due: 2026-10-15',
+                    color: Colors.greenAccent,
+                  ),
+                  const Divider(color: Colors.white12, height: 12),
+
+                  _billRow(
+                    icon: Icons.local_gas_station_outlined,
+                    title: 'Gas',
+                    amount: '¥4,800',
+                    dueDate: 'Due: 2026-10-18',
+                    color: Colors.redAccent,
+                  ),
+                  const Divider(color: Colors.white12, height: 12),
+
+                  _billRow(
+                    icon: Icons.play_circle_outline,
+                    title: 'Netflix',
+                    amount: '¥1,200',
+                    dueDate: 'Due: 2026-10-22',
+                    color: Colors.pinkAccent,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _billRow({
+    required IconData icon,
+    required String title,
+    required String amount,
+    required String dueDate,
+    required Color color,
+  }) {
+    return Row(
+      children: [
+        Container(
+          width: 32,
+          height: 32,
+          decoration: BoxDecoration(
+            color: color.withValues(alpha: 0.12),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Icon(icon, color: color, size: 18),
+        ),
+        const SizedBox(width: 8),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                dueDate,
+                style: const TextStyle(color: Colors.white54, fontSize: 10),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(width: 6),
+        Text(
+          amount,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ],
     );
   }
 }
