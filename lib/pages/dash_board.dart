@@ -1,4 +1,6 @@
-﻿import 'package:flutter/material.dart';
+﻿//import 'package:app/main.dart';
+//import 'package:app/features/dashboard/dashboard_shell.dart';
+import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:intl/intl.dart';
 import 'package:app/models/transaction.dart';
@@ -41,13 +43,7 @@ class _DashboardPageState extends State<DashboardPage> {
     final isMobile = Responsive.isMobile(context);
 
     return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF020617), Color(0xFF08122D), Color(0xFF020617)],
-        ),
-      ),
+      color: const Color(0xFFF4F5FA),
       child: SingleChildScrollView(
         padding: EdgeInsets.all(isMobile ? 12 : 24),
         child: Column(
@@ -66,7 +62,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       Text(
                         'Dashboard',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Color(0xFF202844),
                           fontSize: isMobile ? 26 : 32,
                           fontWeight: FontWeight.bold,
                         ),
@@ -75,7 +71,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       const Text(
                         "Good evening 👋",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Color(0xFF202844),
                           fontSize: 17,
                           fontWeight: FontWeight.w500,
                         ),
@@ -84,7 +80,7 @@ class _DashboardPageState extends State<DashboardPage> {
                       Text(
                         'Overview.',
                         style: TextStyle(
-                          color: Colors.white.withValues(alpha: 0.5),
+                          color: Color(0xFF8992AB),
                           fontSize: 14,
                         ),
                       ),
@@ -111,25 +107,23 @@ class _DashboardPageState extends State<DashboardPage> {
                           vertical: 10,
                         ),
                         decoration: BoxDecoration(
-                          color: const Color(0xFF1E293B),
+                          color: Colors.white,
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(
-                            color: Colors.white.withValues(alpha: 0.08),
-                          ),
+                          border: Border.all(color: const Color(0xFFEAECF2)),
                         ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             const Icon(
                               Icons.calendar_month_outlined,
-                              color: Colors.white70,
+                              color: Color(0xFF68718A),
                               size: 18,
                             ),
                             const SizedBox(width: 6),
                             Text(
                               DateFormat('MMM').format(_selectedMonth),
                               style: const TextStyle(
-                                color: Colors.white70,
+                                color: Color(0xFF202844),
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500,
                               ),
@@ -317,7 +311,7 @@ class _DashboardPageState extends State<DashboardPage> {
                           ],
                         ),
                       ),
-                    )
+                    ),
                   ],
                 );
               },
@@ -500,15 +494,24 @@ class _SummaryCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isBalance = title == "Total Balance";
+
+    final Color cardColor = isBalance ? const Color(0xFF6975F8) : Colors.white;
+    final Color textColor = isBalance ? Colors.white : const Color(0xFF202844);
+    final Color lableColor = isBalance ? Colors.white : const Color(0xFF68718A);
+
+    final Color changeColor = isBalance
+        ? const Color(0xFFB9F8D7)
+        : title == "Income"
+        ? const Color(0xFF159C7D)
+        : const Color(0xFFEA685A);
+
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(22),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: gradientColors,
-        ),
-        borderRadius: BorderRadius.circular(20),
+        color: cardColor,
+        borderRadius: BorderRadius.circular(14),
+        border: isBalance ? null : Border.all(color: const Color(0xFFEAECF2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -517,35 +520,48 @@ class _SummaryCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                title,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 14,
+                title == "Expense"
+                    ? "Total expenses"
+                    : title == "Income"
+                    ? "Total income"
+                    : "Total balance",
+                style: TextStyle(
+                  color: lableColor,
+                  fontSize: 13,
                   fontWeight: FontWeight.w500,
                 ),
               ),
-              Icon(icon, color: Colors.white70, size: 20),
+              Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: isBalance
+                      ? Colors.white.withValues(alpha: 0.18)
+                      : const Color(0xFFF1F2FF),
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(
+                  icon,
+                  color: isBalance ? Colors.white : const Color(0xFF6975F8),
+                  size: 18,
+                ),
+              ),
             ],
           ),
-
-          const SizedBox(height: 24),
-
+          const SizedBox(height: 20),
           Text(
             amount,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 28,
+            style: TextStyle(
+              color: textColor,
+              fontSize: 25,
               fontWeight: FontWeight.bold,
             ),
           ),
-
           const SizedBox(height: 8),
-
           Text(
             subtitle,
             style: TextStyle(
-              color: subtitleColor,
-              fontSize: 13,
+              color: changeColor,
+              fontSize: 12,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -564,33 +580,55 @@ class SavingsChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const double savedAmount = 80000;
+    const double savingsGoal = 1000000;
+    const double progress = savedAmount / savingsGoal;
+
+    final double remaining = savingsGoal - savedAmount;
+
+    final currencyFormat = NumberFormat("#,###");
+
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFF111827),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: const Color(0xFFEAECF2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          //Header
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                'Savings',
+                "Savings goal",
                 style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF202844),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              Icon(Icons.more_vert, color: Colors.white.withValues(alpha: 0.6)),
+              Container(
+                width: 30,
+                height: 30,
+                decoration: BoxDecoration(
+                  border: Border.all(color: const Color(0xFFEAECF2)),
+                  borderRadius: BorderRadius.circular(9),
+                ),
+                child: const Icon(
+                  Icons.more_horiz,
+                  color: Color(0xFF8992AB),
+                  size: 18,
+                ),
+              ),
             ],
           ),
 
-          const SizedBox(height: 20),
+          const SizedBox(height: 16),
 
+          //Circular progress chart
           SizedBox(
             height: 180,
             child: Stack(
@@ -603,15 +641,15 @@ class SavingsChart extends StatelessWidget {
                     startDegreeOffset: -90,
                     sections: [
                       PieChartSectionData(
-                        value: 10,
-                        color: Colors.cyanAccent,
-                        radius: 20,
+                        value: progress * 100,
+                        color: const Color(0xFF6975F8),
+                        radius: 16,
                         showTitle: false,
                       ),
                       PieChartSectionData(
-                        value: 90,
-                        color: Colors.white.withValues(alpha: 0.10),
-                        radius: 20,
+                        value: (1 - progress) * 100,
+                        color: const Color(0xFFEDF0FA),
+                        radius: 16,
                         showTitle: false,
                       ),
                     ],
@@ -620,22 +658,18 @@ class SavingsChart extends StatelessWidget {
 
                 Column(
                   mainAxisSize: MainAxisSize.min,
-                  children: const [
+                  children: [
                     Text(
-                      '10%',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 28,
+                      '${(progress * 100).round()}%',
+                      style: const TextStyle(
+                        color: Color(0xFF202844),
+                        fontSize: 25,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Text(
-                      '¥100,000',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                      ),
+                    const Text(
+                      "Completed",
+                      style: TextStyle(color: Color(0xFF8992AB), fontSize: 11),
                     ),
                   ],
                 ),
@@ -643,62 +677,67 @@ class SavingsChart extends StatelessWidget {
             ),
           ),
 
-          const SizedBox(height: 8),
-
-          Text(
-            'Savings Goal',
-            style: TextStyle(
-              color: Colors.white.withValues(alpha: 0.5),
-              fontSize: 12,
-            ),
-          ),
-
           const SizedBox(height: 4),
 
-          const Text(
-            '¥1,000,000',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
+          // saved amount
+          Center(
+            child: Text(
+              "of  ¥${currencyFormat.format(savingsGoal)} Goal",
+              style: const TextStyle(color: Color(0xFF8992AB), fontSize: 11),
             ),
           ),
-
           const SizedBox(height: 16),
 
-          Container(
-            height: 8,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: Colors.white.withValues(alpha: 0.08),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: FractionallySizedBox(
-              alignment: Alignment.centerLeft,
-              widthFactor: 0.1,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.cyanAccent,
-                  borderRadius: BorderRadius.circular(10),
-                ),
+          //horizontal bar
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: LinearProgressIndicator(
+              value: progress,
+              minHeight: 6,
+              backgroundColor: const Color(0xFFEDF0FA),
+              valueColor: const AlwaysStoppedAnimation<Color>(
+                Color(0xFF6975F8),
               ),
             ),
           ),
 
+          const SizedBox(height: 12),
+
+          //remaining amount
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                "Still to go",
+                style: TextStyle(color: Color(0xFF8992AB), fontSize: 11),
+              ),
+              Text(
+                "¥${currencyFormat.format(remaining)}",
+                style: const TextStyle(
+                  color: Color(0xFF202844),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ],
+          ),
+
           const SizedBox(height: 16),
 
+          //add saving button
           SizedBox(
             width: double.infinity,
             child: ElevatedButton.icon(
               onPressed: () {},
-              icon: const Icon(Icons.add, size: 18),
-              label: const Text('Add Savings'),
+              icon: const Icon(Icons.add, size: 16),
+              label: const Text("Add to savings"),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.cyanAccent,
-                foregroundColor: Colors.black,
-                padding: const EdgeInsets.symmetric(vertical: 14),
+                backgroundColor: Color(0xFF6975F8),
+                foregroundColor: Colors.white,
+                elevation: 0,
+                padding: const EdgeInsets.symmetric(vertical: 13),
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(10),
                 ),
               ),
             ),
@@ -723,8 +762,9 @@ class _RecentTransactions extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        color: const Color(0xFF1E293B),
-        borderRadius: BorderRadius.circular(20),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: const Color(0xFFEAECF2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -734,7 +774,7 @@ class _RecentTransactions extends StatelessWidget {
               const Text(
                 'Recent Transactions',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFF202844),
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
@@ -745,7 +785,7 @@ class _RecentTransactions extends StatelessWidget {
                 },
                 child: Text(
                   "View more",
-                  style: TextStyle(color: Colors.cyanAccent),
+                  style: TextStyle(color: Color(0xFF6975F8)),
                 ),
               ),
             ],
@@ -757,19 +797,27 @@ class _RecentTransactions extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               leading: Icon(
                 transaction.isIncome ? Icons.attach_money : Icons.money_off,
-                color: transaction.isIncome ? Colors.green : Colors.red,
+                color: transaction.isIncome
+                    ? const Color(0xFF159C7D)
+                    : const Color(0xFFD96B62),
               ),
               title: Text(
                 transaction.title,
-                style: const TextStyle(color: Colors.white),
+                style: const TextStyle(
+                  color: Color(0xFF202844),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
               trailing: Text(
                 '${transaction.isIncome ? '+' : '-'}¥${NumberFormat('#,###').format(transaction.amount.abs())}',
                 style: TextStyle(
                   color: transaction.isIncome
-                      ? Colors.greenAccent
-                      : Colors.white,
-                  fontWeight: FontWeight.w500,
+                      ? const Color(0xFF159C7D)
+                      : const Color(0xFF202844),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                  letterSpacing: -0.3,
                 ),
               ),
             );
@@ -792,9 +840,9 @@ class _UpcomingBills extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: const Color(0xFF1E293B),
-        borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.06)),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: const Color(0xFFEAECF2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -805,14 +853,14 @@ class _UpcomingBills extends StatelessWidget {
               const Text(
                 'Upcoming Bills',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFF202844),
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Icon(
                 Icons.receipt_long_outlined,
-                color: Colors.white.withValues(alpha: 0.6),
+                color: Color(0xFF6975F8).withValues(alpha: 0.6),
               ),
             ],
           ),
@@ -827,61 +875,61 @@ class _UpcomingBills extends StatelessWidget {
                     title: 'Rent',
                     amount: '¥124,000',
                     dueDate: 'Due: 2026-10-10',
-                    color: Colors.orangeAccent,
+                    color: Color(0xFFD99550),
                   ),
-                  const Divider(color: Colors.white12, height: 12),
+                  const Divider(color: Color(0xFFEAECF2), height: 12),
 
                   _billRow(
                     icon: Icons.electric_bolt_outlined,
                     title: 'Electricity',
                     amount: '¥8,500',
                     dueDate: 'Due: 2026-10-20',
-                    color: Colors.yellowAccent,
+                    color: Color(0xFFB69A38),
                   ),
-                  const Divider(color: Colors.white12, height: 12),
+                  const Divider(color: Color(0xFFEAECF2), height: 12),
 
                   _billRow(
                     icon: Icons.water_drop_outlined,
                     title: 'Water',
                     amount: '¥5,200',
                     dueDate: 'Due: 2026-10-25',
-                    color: Colors.blueAccent,
+                    color: Color(0xFF568BC7),
                   ),
-                  const Divider(color: Colors.white12, height: 12),
+                  const Divider(color: Color(0xFFEAECF2), height: 12),
 
                   _billRow(
                     icon: Icons.wifi_outlined,
                     title: 'Internet',
                     amount: '¥6,040',
                     dueDate: 'Due: 2026-10-30',
-                    color: Colors.purpleAccent,
+                    color: Color(0xFF8B79C6),
                   ),
-                  const Divider(color: Colors.white12, height: 12),
+                  const Divider(color: Color(0xFFEAECF2), height: 12),
 
                   _billRow(
                     icon: Icons.phone_android_outlined,
                     title: 'Mobile',
                     amount: '¥14,500',
                     dueDate: 'Due: 2026-10-15',
-                    color: Colors.greenAccent,
+                    color: Color(0xFF159C7D),
                   ),
-                  const Divider(color: Colors.white12, height: 12),
+                  const Divider(color: Color(0xFFEAECF2), height: 12),
 
                   _billRow(
                     icon: Icons.local_gas_station_outlined,
                     title: 'Gas',
                     amount: '¥4,800',
                     dueDate: 'Due: 2026-10-18',
-                    color: Colors.redAccent,
+                    color: Color(0xFFD96B62),
                   ),
-                  const Divider(color: Colors.white12, height: 12),
+                  const Divider(color: Color(0xFFEAECF2), height: 12),
 
                   _billRow(
                     icon: Icons.play_circle_outline,
                     title: 'Netflix',
                     amount: '¥1,200',
                     dueDate: 'Due: 2026-10-22',
-                    color: Colors.pinkAccent,
+                    color: Color(0xFFC8799A),
                   ),
                 ],
               ),
@@ -918,7 +966,7 @@ class _UpcomingBills extends StatelessWidget {
               Text(
                 title,
                 style: const TextStyle(
-                  color: Colors.white,
+                  color: Color(0xFF202844),
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
                 ),
@@ -926,7 +974,7 @@ class _UpcomingBills extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 dueDate,
-                style: const TextStyle(color: Colors.white54, fontSize: 10),
+                style: const TextStyle(color: Color(0xFF8992AB), fontSize: 10),
               ),
             ],
           ),
@@ -935,7 +983,7 @@ class _UpcomingBills extends StatelessWidget {
         Text(
           amount,
           style: const TextStyle(
-            color: Colors.white,
+            color: Color(0xFF202844),
             fontSize: 12,
             fontWeight: FontWeight.w600,
           ),
@@ -948,7 +996,6 @@ class _UpcomingBills extends StatelessWidget {
 // ======================================================
 // SPENDING OVER TIME CHART
 // ======================================================
-
 class SpendingChart extends StatelessWidget {
   final DateTime selectedMonth;
 
@@ -985,103 +1032,157 @@ class SpendingChart extends StatelessWidget {
   ];
 
   static const List<String> _months = [
-    'jan',
-    'feb',
-    'mar',
-    'apr',
-    'may',
-    'jun',
-    'jul',
-    'aug',
-    'sep',
-    'oct',
-    'nov',
-    'dec',
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
   ];
 
   @override
   Widget build(BuildContext context) {
+    const darkPurple = Color(0xFF6975F8);
+    const lightPurple = Color(0xFFC9CEFF);
+    const darkText = Color(0xFF202844);
+    const secondaryText = Color(0xFF8992AB);
+    const gridColor = Color(0xFFEAECF2);
+
+    //calculate the remains after expenses
+    final savingsValues = List.generate(
+      _incomeValues.length,
+      (index) => (_incomeValues[index] - _expenseValues[index])
+          .clamp(0.0, double.infinity)
+          .toDouble(),
+    );
+
+    //create the stack bar for each month
+    final barGroups = List.generate(_months.length, (index) {
+      final expenses = _expenseValues[index];
+      final savings = savingsValues[index];
+      final total = expenses + savings;
+
+      return BarChartGroupData(
+        x: index,
+        barRods: [
+          BarChartRodData(
+            toY: total,
+            width: 20,
+            borderRadius: BorderRadius.circular(4),
+            rodStackItems: [
+              // dark purple = money spent
+              BarChartRodStackItem(0, expenses, darkPurple),
+
+              // light purple = money remaining
+              if (savings > 0)
+                BarChartRodStackItem(expenses, total, lightPurple),
+            ],
+          ),
+        ],
+      );
+    });
+
     return Container(
       height: Responsive.isMobile(context) ? 300 : 450,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: const Color(0xFF111827),
-        boxShadow: [
-          BoxShadow(
-            color: const Color(0xFF00E5FF).withValues(alpha: 0.15),
-            blurRadius: 25,
-            offset: const Offset(0, 8),
-          ),
-        ],
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(14),
+        border: Border.all(color: gridColor),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Spending Over Time',
+            "Cash Flow",
             style: TextStyle(
-              color: Colors.white,
-              fontSize: 22,
+              color: darkText,
+              fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
 
-          const SizedBox(height: 12),
+          const SizedBox(height: 6),
 
-          // Chart legend
+          const Text(
+            "Monthly spending and savings",
+            style: TextStyle(color: secondaryText, fontSize: 12),
+          ),
+
+          const SizedBox(height: 16),
+
+          //chart legend.
           Row(
             children: [
               Container(
-                width: 10,
-                height: 10,
+                width: 8,
+                height: 8,
                 decoration: const BoxDecoration(
-                  color: Colors.cyanAccent,
+                  color: darkPurple,
                   shape: BoxShape.circle,
                 ),
               ),
               const SizedBox(width: 8),
-              const Text('Income', style: TextStyle(color: Colors.white70)),
-              const SizedBox(width: 24),
+              const Text(
+                "Spent",
+                style: TextStyle(color: secondaryText, fontSize: 12),
+              ),
+
+              const SizedBox(width: 20),
+
               Container(
-                width: 10,
-                height: 10,
+                width: 8,
+                height: 8,
                 decoration: const BoxDecoration(
-                  color: Colors.pinkAccent,
+                  color: lightPurple,
                   shape: BoxShape.circle,
                 ),
               ),
               const SizedBox(width: 8),
-              const Text('Expense', style: TextStyle(color: Colors.white70)),
+              const Text(
+                "Saved",
+                style: TextStyle(color: secondaryText, fontSize: 12),
+              ),
             ],
           ),
 
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
 
           Expanded(
-            child: LineChart(
-              LineChartData(
-                minX: 0,
-                maxX: 11,
+            child: BarChart(
+              BarChartData(
                 minY: 0,
                 maxY: 3500,
-                lineTouchData: LineTouchData(
-                  handleBuiltInTouches: true,
-                  touchTooltipData: LineTouchTooltipData(
-                    getTooltipItems: (spots) {
-                      return spots.map((spot) {
-                        return LineTooltipItem(
-                          spot.barIndex == 0
-                              ? 'Income\nÂ¥${spot.y.toInt()}'
-                              : 'Expense\nÂ¥${spot.y.toInt()}',
-                          TextStyle(
-                            color: spot.barIndex == 0
-                                ? Colors.cyanAccent
-                                : Colors.pinkAccent,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        );
-                      }).toList();
+
+                barGroups: barGroups,
+
+                alignment: BarChartAlignment.spaceAround,
+
+                barTouchData: BarTouchData(
+                  enabled: true,
+                  touchTooltipData: BarTouchTooltipData(
+                    getTooltipItem: (group, groupIndex, rod, rodIndex) {
+                      final index = group.x;
+
+                      final spent = _expenseValues[index];
+                      final saved = savingsValues[index];
+
+                      return BarTooltipItem(
+                        '${_months[index]}\n'
+                        'Spent: ¥${spent.toInt()}\n'
+                        'Saved: ¥${saved.toInt()}',
+                        const TextStyle(
+                          color: Colors.white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      );
                     },
                   ),
                 ),
@@ -1091,10 +1192,7 @@ class SpendingChart extends StatelessWidget {
                   drawVerticalLine: false,
                   horizontalInterval: 500,
                   getDrawingHorizontalLine: (value) {
-                    return FlLine(
-                      color: Colors.white.withValues(alpha: 0.08),
-                      strokeWidth: 1,
-                    );
+                    return const FlLine(color: gridColor, strokeWidth: 1);
                   },
                 ),
 
@@ -1114,7 +1212,7 @@ class SpendingChart extends StatelessWidget {
                     sideTitles: SideTitles(
                       showTitles: true,
                       interval: 1,
-                      getTitlesWidget: (value, meta) {
+                      getTitlesWidget: ((value, meta) {
                         final index = value.toInt();
 
                         if (index < 0 || index >= _months.length) {
@@ -1126,46 +1224,15 @@ class SpendingChart extends StatelessWidget {
                           child: Text(
                             _months[index],
                             style: const TextStyle(
-                              color: Colors.white70,
-                              fontSize: 12,
+                              color: secondaryText,
+                              fontSize: 11,
                             ),
                           ),
                         );
-                      },
+                      }),
                     ),
                   ),
                 ),
-
-                lineBarsData: [
-                  // Income
-                  LineChartBarData(
-                    isCurved: true,
-                    color: Colors.cyanAccent,
-                    barWidth: 4,
-                    dotData: const FlDotData(show: true),
-                    spots: List.generate(
-                      _incomeValues.length,
-                      (index) => FlSpot(index.toDouble(), _incomeValues[index]),
-                    ),
-                    belowBarData: BarAreaData(
-                      show: true,
-                      color: Colors.cyanAccent.withValues(alpha: 0.12),
-                    ),
-                  ),
-
-                  // Expense
-                  LineChartBarData(
-                    isCurved: true,
-                    color: Colors.pinkAccent,
-                    barWidth: 4,
-                    dotData: const FlDotData(show: true),
-                    spots: List.generate(
-                      _expenseValues.length,
-                      (index) =>
-                          FlSpot(index.toDouble(), _expenseValues[index]),
-                    ),
-                  ),
-                ],
               ),
             ),
           ),
